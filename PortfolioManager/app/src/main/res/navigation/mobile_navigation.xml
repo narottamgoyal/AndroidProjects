@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_csv_file">
+
+    <fragment
+        android:id="@+id/navigation_csv_file"
+        android:name="ng.portfoliomanager.ui.CsvFileList.CsvFileListFragment"
+        android:label="@string/csv_file"
+        tools:layout="@layout/fragment_csv_file_list" />
+
+    <fragment
+        android:id="@+id/navigation_add_stock"
+        android:name="ng.portfoliomanager.ui.AddStock.AddStockFragment"
+        android:label="@string/add_stock"
+        tools:layout="@layout/fragment_add_stock" />
+
+    <fragment
+        android:id="@+id/navigation_RealmDb_List"
+        android:name="ng.portfoliomanager.ui.RealmDbList.RealmDbListFragment"
+        android:label="@string/title_RealmDb_List"
+        tools:layout="@layout/fragment_realm_db_list" />
+</navigation>

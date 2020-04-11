@@ -39,10 +39,10 @@ public class CsvFileListFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void LoadStockList(View root) {
         csvFileListViewModel.readCsvFile();
-        if (csvFileListViewModel.stockList.size() == 0)
+        if (csvFileListViewModel.stockReports.size() == 0)
             Toast.makeText(this.getContext(), "The file is empty.", Toast.LENGTH_LONG).show();
         else {
-            ThreeColumn_ListAdapter adapter = new ThreeColumn_ListAdapter(this.getContext(), R.layout.list_adapter_view, csvFileListViewModel.stockList);
+            ThreeColumn_ListAdapter adapter = new ThreeColumn_ListAdapter(this.getContext(), R.layout.list_adapter_view, csvFileListViewModel.stockReports);
             listView = (ListView) root.findViewById(R.id.csvListView);
             listView.setAdapter(adapter);
         }

@@ -13,12 +13,13 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import ng.portfoliomanager.ui.common.StockInfo;
+import ng.portfoliomanager.ui.common.StockDetail;
+import ng.portfoliomanager.ui.common.StockReport;
 
 public class CsvFileListViewModel extends ViewModel {
     private String fileName = null; //(Environment.getExternalStorageDirectory().getAbsolutePath() + "/portfolioManagerData.csv");
     private String fileData = "";
-    public ArrayList<StockInfo> stockList = new ArrayList<StockInfo>();
+    public ArrayList<StockReport> stockReports = new ArrayList<StockReport>();
 
     public CsvFileListViewModel() {
     }
@@ -47,10 +48,11 @@ public class CsvFileListViewModel extends ViewModel {
         if (list.length <= 1) return;
         for (int i = 1; i < list.length; i++) {
             String rowData[] = list[i].split(",");
-            StockInfo obj = stockList.stream().filter(o -> o.getName().equals(rowData[0])).findFirst().orElse(null);
-            if (obj == null) stockList.add(new StockInfo(rowData[0], 1));
+            StockReport obj = stockReports.stream().filter(o -> o.getName().equals(rowData[0])).findFirst().orElse(null);
+            if (obj == null)
+                stockReports.add(new StockReport(new StockDetail(rowData[0], rowData[1])));
             else
-                obj.setCount(obj.getCount() + 1);
+                obj.updateStockReport(new StockDetail(rowData[0], rowData[1]));
         }
     }
 

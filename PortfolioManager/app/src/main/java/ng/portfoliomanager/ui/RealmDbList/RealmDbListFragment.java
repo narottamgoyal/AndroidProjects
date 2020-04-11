@@ -1,6 +1,7 @@
 package ng.portfoliomanager.ui.RealmDbList;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -24,6 +26,7 @@ public class RealmDbListFragment extends Fragment {
     private Realm realm;
     RealmChangeListener realmChangeListener;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         realmDbListViewModel = ViewModelProviders.of(this).get(RealmDbListViewModel.class);
@@ -32,7 +35,7 @@ public class RealmDbListFragment extends Fragment {
         realmDatabaseHelper = new RealmDatabaseHelper(realm);
         listView = (ListView) root.findViewById(R.id.realmListView);
 
-        CustomAdaptor adapter = new CustomAdaptor(this.getContext(), realmDatabaseHelper.getAll());
+        CustomAdaptor adapter = new CustomAdaptor(this.getContext(), realmDatabaseHelper.GetReport());
         listView.setAdapter(adapter);
 
         Refresh(this.getContext());
@@ -43,7 +46,7 @@ public class RealmDbListFragment extends Fragment {
         realmChangeListener = new RealmChangeListener() {
             @Override
             public void onChange(Object o) {
-                CustomAdaptor adapter = new CustomAdaptor(context, realmDatabaseHelper.getAll());
+                CustomAdaptor adapter = new CustomAdaptor(context, realmDatabaseHelper.GetReport());
                 listView.setAdapter(adapter);
             }
         };

@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import ng.portfoliomanager.R;
 import ng.portfoliomanager.ui.common.StockDetail;
 
@@ -16,7 +17,7 @@ public class StockDetailActivity extends AppCompatActivity {
 
     private Realm realm;
     EditText editText;
-    StockDetail stockDetail;
+    RealmResults<StockDetail> realmResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +28,11 @@ public class StockDetailActivity extends AppCompatActivity {
         editText = findViewById(R.id.editStockNameTextView);
 
         Intent intent = getIntent();
-        String stockId = intent.getStringExtra("id");
-        String stockName = intent.getStringExtra("name");
+        //String stockId = intent.getStringExtra("id");
+        String stockName = intent.getStringExtra("stockName");
 
-        stockDetail = realm.where(StockDetail.class).equalTo("Id", stockId).findFirst();
-        editText.setText(stockDetail.getName());
+        realmResults = realm.where(StockDetail.class).equalTo("Name", stockName).findAll();
+        editText.setText(stockName);
 
         updateStockButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +45,8 @@ public class StockDetailActivity extends AppCompatActivity {
 
     private void updateRecord() {
         realm.beginTransaction();
-        stockDetail.setName(editText.getText().toString());
+        for (StockDetail stockDetail : realmResults)
+            stockDetail.setName(editText.getText().toString().toUpperCase());
         realm.commitTransaction();
     }
 

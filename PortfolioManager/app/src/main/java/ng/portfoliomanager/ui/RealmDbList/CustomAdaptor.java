@@ -11,27 +11,28 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ng.portfoliomanager.R;
+import ng.portfoliomanager.ui.common.StockReport;
 import ng.portfoliomanager.ui.updatestockdetail.StockDetailActivity;
 import ng.portfoliomanager.ui.common.StockDetail;
 
 public class CustomAdaptor extends BaseAdapter {
 
     Context context;
-    ArrayList<StockDetail> stockDetails;
+    ArrayList<StockReport> stockReports;
 
-    public CustomAdaptor(Context context, ArrayList<StockDetail> stockDetails) {
+    public CustomAdaptor(Context context, ArrayList<StockReport> stockReports) {
         this.context = context;
-        this.stockDetails = stockDetails;
+        this.stockReports = stockReports;
     }
 
     @Override
     public int getCount() {
-        return stockDetails.size();
+        return stockReports.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return stockDetails.get(position);
+        return stockReports.get(position);
     }
 
     @Override
@@ -44,16 +45,16 @@ public class CustomAdaptor extends BaseAdapter {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater.inflate(R.layout.list_adapter_view, parent, false);
-        StockDetail stockDetail = (StockDetail) this.getItem(position);
+        StockReport stockReport = (StockReport) this.getItem(position);
 
-        if (stockDetail != null) {
+        if (stockReport != null) {
             TextView stockName = (TextView) convertView.findViewById(R.id.stockNameTextView);
             TextView stockCount = (TextView) convertView.findViewById(R.id.stockCounttextView);
             if (stockName != null) {
-                stockName.setText(stockDetail.getName());
+                stockName.setText(stockReport.getName());
             }
             if (stockCount != null) {
-                stockCount.setText("NA");
+                stockCount.setText(stockReport.getCount() + "");
             }
 
             // Row click event for update
@@ -61,8 +62,8 @@ public class CustomAdaptor extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, StockDetailActivity.class);
-                    intent.putExtra("id", stockDetail.getId());
-                    intent.putExtra("name", stockDetail.getName());
+                    //intent.putExtra("id", stockReport.getId());
+                    intent.putExtra("stockName", stockReport.getName());
                     context.startActivity(intent);
                 }
             });

@@ -10,15 +10,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ng.portfoliomanager.R;
-import ng.portfoliomanager.ui.common.StockInfo;
+import ng.portfoliomanager.ui.common.StockReport;
 
-public class ThreeColumn_ListAdapter extends ArrayAdapter<StockInfo> {
+public class ThreeColumn_ListAdapter extends ArrayAdapter<StockReport> {
 
     private LayoutInflater mInflater;
-    private ArrayList<StockInfo> users;
+    private ArrayList<StockReport> users;
     private int mViewResourceId;
 
-    public ThreeColumn_ListAdapter(Context context, int textViewResourceId, ArrayList<StockInfo> users) {
+    public ThreeColumn_ListAdapter(Context context, int textViewResourceId, ArrayList<StockReport> users) {
         super(context, textViewResourceId, users);
         this.users = users;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -28,16 +28,16 @@ public class ThreeColumn_ListAdapter extends ArrayAdapter<StockInfo> {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = mInflater.inflate(mViewResourceId, null);
 
-        StockInfo stockInfo = users.get(position);
+        StockReport stockReport = users.get(position);
 
-        if (stockInfo != null) {
+        if (stockReport != null) {
             TextView stockName = (TextView) convertView.findViewById(R.id.stockNameTextView);
             TextView stockCount = (TextView) convertView.findViewById(R.id.stockCounttextView);
             if (stockName != null) {
-                stockName.setText(stockInfo.getName());
+                stockName.setText(stockReport.getName());
             }
             if (stockCount != null) {
-                stockCount.setText(stockInfo.getCount() + "");
+                stockCount.setText(stockReport.getCount() + "");
             }
         }
         return convertView;

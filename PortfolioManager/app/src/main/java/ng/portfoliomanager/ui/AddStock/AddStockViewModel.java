@@ -81,7 +81,7 @@ public class AddStockViewModel extends ViewModel {
         new Thread() {
             public void run() {
                 try {
-                    fileData += "\n" + finalData.toUpperCase();
+                    fileData += "\n" + finalData;
                     FileWriter fw = new FileWriter(fileName);
                     fw.append(fileData);
                     fw.close();

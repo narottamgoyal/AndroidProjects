@@ -39,7 +39,7 @@ public class AddStockFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String stockName = inputEditText.getText().toString();
-                addStockViewModel.saveRecord(stockName);
+                addStockViewModel.saveRecord(stockName.toUpperCase());
             }
         });
         addStockViewModel.readCsvFile();

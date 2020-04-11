@@ -1,5 +1,9 @@
 package ng.portfoliomanager.ui.common;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.util.ArrayList;
 
 import io.realm.Realm;
@@ -18,10 +22,15 @@ public class RealmDatabaseHelper {
         stockDetails = realm.where(StockDetail.class).findAll();
     }
 
-    public ArrayList<StockDetail> getAll() {
-        ArrayList<StockDetail> list = new ArrayList<>();
-        for (StockDetail stock : stockDetails)
-            list.add(stock);
-        return list;
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public ArrayList<StockReport> GetReport() {
+        ArrayList<StockReport> stockList = new ArrayList<StockReport>();
+        for (StockDetail stock : stockDetails) {
+            StockReport obj = stockList.stream().filter(o -> o.getName().equals(stock.getName())).findFirst().orElse(null);
+            if (obj == null) stockList.add(new StockReport(stock));
+            else
+                obj.updateStockReport(stock);
+        }
+        return stockList;
     }
 }

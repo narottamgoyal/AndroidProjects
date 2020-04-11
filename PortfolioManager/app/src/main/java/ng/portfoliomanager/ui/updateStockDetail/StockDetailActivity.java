@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -40,6 +41,10 @@ public class StockDetailActivity extends AppCompatActivity {
         LoadStockDetail();
 
         ListView listView = (ListView) findViewById(R.id.stockListView);
+
+        ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.stock_detail_list_header, listView, false);
+        listView.addHeaderView(headerView);
+
         StockDetailListCustomAdaptor adapter = new StockDetailListCustomAdaptor(this, stockDetails);
         listView.setAdapter(adapter);
 

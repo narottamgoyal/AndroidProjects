@@ -5,7 +5,8 @@
     <string name="update_stock_name">Update stock name</string>
     <string name="add_stock">Add Stock</string>
     <string name="title_RealmDb_List">RealmDb</string>
-    <string name="StockNameHeader">Stock Name</string>
+    <string name="stockNameHeader">Stock Name</string>
+    <string name="dateHeader">Date</string>
     <string name="stockCount">Count</string>
     <string name="stockAction">Action</string>
 </resources>

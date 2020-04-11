@@ -16,3 +16,6 @@ Simple Portfolio Manager
 - [SQLite Android Studio Tutorial Storing User Data](https://www.youtube.com/watch?v=sK15YvRIdqY)
 - [Fix getExternalStorageDirectory is deprecated in API 29](https://www.youtube.com/watch?v=TjRpOX2uwWc)
 - [Android Database #1 | Realm database insert data](https://www.youtube.com/watch?v=NUVQb0_Q6Ew)
+- [Realm](https://realm.io/docs/java/latest/#asynchronous-transactions)
+- [Custom ListView Adapter [With Loading Animation]](https://www.youtube.com/watch?v=SApBLHIpH8A)
+- [android listview header](https://www.youtube.com/watch?v=EnG5ZIVfki8)

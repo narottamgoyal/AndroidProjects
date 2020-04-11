@@ -44,6 +44,7 @@ public class RealmDbListFragment extends Fragment {
 
     private void Refresh(Context context) {
         realmChangeListener = new RealmChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onChange(Object o) {
                 CustomAdaptor adapter = new CustomAdaptor(context, realmDatabaseHelper.GetReport());

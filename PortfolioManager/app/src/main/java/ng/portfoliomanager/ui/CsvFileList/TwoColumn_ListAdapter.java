@@ -12,13 +12,13 @@ import java.util.ArrayList;
 import ng.portfoliomanager.R;
 import ng.portfoliomanager.ui.common.StockReport;
 
-public class ThreeColumn_ListAdapter extends ArrayAdapter<StockReport> {
+public class TwoColumn_ListAdapter extends ArrayAdapter<StockReport> {
 
     private LayoutInflater mInflater;
     private ArrayList<StockReport> users;
     private int mViewResourceId;
 
-    public ThreeColumn_ListAdapter(Context context, int textViewResourceId, ArrayList<StockReport> users) {
+    public TwoColumn_ListAdapter(Context context, int textViewResourceId, ArrayList<StockReport> users) {
         super(context, textViewResourceId, users);
         this.users = users;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

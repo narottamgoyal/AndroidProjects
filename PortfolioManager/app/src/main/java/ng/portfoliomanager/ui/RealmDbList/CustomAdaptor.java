@@ -12,8 +12,7 @@ import java.util.ArrayList;
 
 import ng.portfoliomanager.R;
 import ng.portfoliomanager.ui.common.StockReport;
-import ng.portfoliomanager.ui.updatestockdetail.StockDetailActivity;
-import ng.portfoliomanager.ui.common.StockDetail;
+import ng.portfoliomanager.ui.updateStockDetail.StockDetailActivity;
 
 public class CustomAdaptor extends BaseAdapter {
 
@@ -67,7 +66,6 @@ public class CustomAdaptor extends BaseAdapter {
                     context.startActivity(intent);
                 }
             });
-
         }
 
         return convertView;

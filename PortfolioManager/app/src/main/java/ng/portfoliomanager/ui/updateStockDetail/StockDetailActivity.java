@@ -1,4 +1,4 @@
-package ng.portfoliomanager.ui.updatestockdetail;
+package ng.portfoliomanager.ui.updateStockDetail;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,10 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
 import ng.portfoliomanager.R;
+import ng.portfoliomanager.ui.RealmDbList.CustomAdaptor;
 import ng.portfoliomanager.ui.common.StockDetail;
 
 public class StockDetailActivity extends AppCompatActivity {
@@ -18,6 +22,7 @@ public class StockDetailActivity extends AppCompatActivity {
     private Realm realm;
     EditText editText;
     RealmResults<StockDetail> realmResults;
+    ArrayList<StockDetail> stockDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,12 @@ public class StockDetailActivity extends AppCompatActivity {
         String stockName = intent.getStringExtra("stockName");
 
         realmResults = realm.where(StockDetail.class).equalTo("Name", stockName).findAll();
+        LoadStockDetail();
+
+        ListView listView = (ListView) findViewById(R.id.stockListView);
+        StockDetailListCustomAdaptor adapter = new StockDetailListCustomAdaptor(this, stockDetails);
+        listView.setAdapter(adapter);
+
         editText.setText(stockName);
 
         updateStockButton.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +52,12 @@ public class StockDetailActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    private void LoadStockDetail() {
+        stockDetails = new ArrayList<>();
+        for (StockDetail stockDetail : realmResults)
+            stockDetails.add(stockDetail);
     }
 
     private void updateRecord() {

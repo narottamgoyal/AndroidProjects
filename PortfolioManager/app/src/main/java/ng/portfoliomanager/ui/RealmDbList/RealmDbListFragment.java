@@ -35,6 +35,10 @@ public class RealmDbListFragment extends Fragment {
         realmDatabaseHelper = new RealmDatabaseHelper(realm);
         listView = (ListView) root.findViewById(R.id.realmListView);
 
+        // List static Header
+        ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.stock_report_list_header, listView, false);
+        listView.addHeaderView(headerView);
+
         CustomAdaptor adapter = new CustomAdaptor(this.getContext(), realmDatabaseHelper.GetReport());
         listView.setAdapter(adapter);
 

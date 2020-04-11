@@ -18,4 +18,5 @@ Simple Portfolio Manager
 - [Android Database #1 | Realm database insert data](https://www.youtube.com/watch?v=NUVQb0_Q6Ew)
 - [Realm](https://realm.io/docs/java/latest/#asynchronous-transactions)
 - [Custom ListView Adapter [With Loading Animation]](https://www.youtube.com/watch?v=SApBLHIpH8A)
-- [android listview header](https://www.youtube.com/watch?v=EnG5ZIVfki8)
+- [Android listview header](https://www.youtube.com/watch?v=EnG5ZIVfki8)
+- [Set the text color of textview in code](https://stackoverflow.com/a/4602929/1175623)

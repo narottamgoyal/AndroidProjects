@@ -1,14 +1,19 @@
 package ng.portfoliomanager.ui.updateStockDetail;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -25,6 +30,7 @@ public class StockDetailActivity extends AppCompatActivity {
     RealmResults<StockDetail> realmResults;
     ArrayList<StockDetail> stockDetails;
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +48,14 @@ public class StockDetailActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.stockListView);
 
-        ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.stock_detail_list_header, listView, false);
+        // List Header create dynamically
+        ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.stock_detail_list, listView, false);
+        TextView stockNameHeader = (TextView) headerView.findViewById(R.id.stockNameId);
+        TextView dateHeader = (TextView) headerView.findViewById(R.id.stockPurchasedDateTextView);
+        stockNameHeader.setText(R.string.stockNameHeader);
+        stockNameHeader.setTextColor(ContextCompat.getColor(this, R.color.colorHeader));
+        dateHeader.setText(R.string.dateHeader);
+        dateHeader.setTextColor(ContextCompat.getColor(this, R.color.colorHeader));
         listView.addHeaderView(headerView);
 
         StockDetailListCustomAdaptor adapter = new StockDetailListCustomAdaptor(this, stockDetails);

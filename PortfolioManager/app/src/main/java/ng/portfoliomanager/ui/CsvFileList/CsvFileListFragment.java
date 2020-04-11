@@ -44,6 +44,11 @@ public class CsvFileListFragment extends Fragment {
         else {
             TwoColumn_ListAdapter adapter = new TwoColumn_ListAdapter(this.getContext(), R.layout.list_adapter_view, csvFileListViewModel.stockReports);
             listView = (ListView) root.findViewById(R.id.csvListView);
+
+            // List static Header
+            ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.stock_report_list_header, listView, false);
+            listView.addHeaderView(headerView);
+
             listView.setAdapter(adapter);
         }
     }

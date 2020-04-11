@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">PortfolioManager</string>
-    <string name="csv_file">From CSV file</string>
+    <string name="csv_file">Using CSV file</string>
     <string name="enter_stock_name">Enter stock name</string>
     <string name="update_stock_name">Update stock name</string>
     <string name="add_stock">Add Stock</string>
-    <string name="title_RealmDb_List">RealmDb</string>
+    <string name="title_RealmDb_List">Using Realm db</string>
     <string name="stockNameHeader">Stock Name</string>
-    <string name="dateHeader">Date</string>
-    <string name="stockCount">Count</string>
+    <string name="dateHeader">Purchased Date</string>
+    <string name="stockCount">Quantity</string>
     <string name="stockAction">Action</string>
 </resources>

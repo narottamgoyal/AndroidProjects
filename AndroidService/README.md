@@ -1,4 +1,4 @@
-# Android Service Example
+# Android Service
 
 # References
 

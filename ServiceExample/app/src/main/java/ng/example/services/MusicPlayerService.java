@@ -21,6 +21,7 @@ public class MusicPlayerService extends Service {
         }
     }
 
+    Intent messageIntent;
     private static final String TAG = "MusicPlayerService";
     private final Binder mBinder = new MyServiceBinder();
     private MediaPlayer mPlayer;
@@ -29,33 +30,36 @@ public class MusicPlayerService extends Service {
     public void onCreate() {
         Log.d(TAG, "onCreate: ");
         super.onCreate();
-        mPlayer = MediaPlayer.create(this, R.raw.dont_stop_the_party);
+        mPlayer = MediaPlayer.create(this, R.raw.dont_stop_the_party_30sec);
+        messageIntent = new Intent(AppConstant.LOCAL_BROADCAST_MANAGER_COMMUNICATION_KEY);
 
-        mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                Intent intent = new Intent(AppConstant.MUSIC_SERVICE_STATUS_COMPLETE);
-                intent.putExtra(AppConstant.MUSIC_SERVICE_STATUS_KEY, AppConstant.MUSIC_SERVICE_STATUS_DONE);
-                LocalBroadcastManager.getInstance(getApplicationContext())
-                        .sendBroadcast(intent);
+        // Service create
+        mPlayer.start();
 
-                stopSelf();
-            }
+        mPlayer.setOnCompletionListener(mp -> {
+            SendMessage(AppConstant.MUSIC_SERVICE_STATUS_KEY, AppConstant.MUSIC_SERVICE_STATUS_COMPLETE);
+            stopSelf();
         });
     }
 
+    private void SendMessage(String key, String message) {
+        messageIntent.putExtra(key, message);
+        LocalBroadcastManager.getInstance(getApplicationContext())
+                .sendBroadcast(messageIntent);
+    }
 
-    @Override
+
+    /*@Override
     public boolean onUnbind(Intent intent) {
         Log.d(TAG, "onUnbind: ");
         return true;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void onRebind(Intent intent) {
         super.onRebind(intent);
         Log.d(TAG, "onRebind: ");
-    }
+    }*/
 
     @Override
     public void onDestroy() {
@@ -70,8 +74,6 @@ public class MusicPlayerService extends Service {
         Log.d(TAG, "onBind: ");
         return mBinder;
     }
-
-    //public client methods
 
     public boolean isPlaying() {
         return mPlayer.isPlaying();

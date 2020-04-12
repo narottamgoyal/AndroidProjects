@@ -14,66 +14,107 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import ng.example.common.AppConstant;
 import ng.example.services.MusicPlayerService;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button mPlayButton;
-    private boolean mBound = false;
-    private MusicPlayerService mMusicPlayerService;
+    private boolean isServiceBound = false;
+    Intent musicServiceIntent;
+    Button musicFunctionButton;
+    ServiceConnection serviceConnection;
+    private MusicPlayerService musicPlayerService;
     private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mPlayButton = findViewById(R.id.playButton);
-        mPlayButton.setOnClickListener(v -> onBtnMusicClicked(v));
+        basicSettings();
     }
 
-    public void onBtnMusicClicked(View view) {
-        if (mBound) {
-            if (mMusicPlayerService.isPlaying()) {
-                mMusicPlayerService.pause();
-                mPlayButton.setText(AppConstant.MUSIC_SERVICE_ACTION_PLAY);
+    private void basicSettings() {
+        Button startServiceButton = findViewById(R.id.startServiceButton);
+        startServiceButton.setOnClickListener(v -> onStartServiceBtnClicked(v));
+
+        Button stopServiceButton = findViewById(R.id.stopServiceButton);
+        stopServiceButton.setOnClickListener(v -> onStopBtnClicked(v));
+
+        Button boundServiceButton = findViewById(R.id.boundServiceButton);
+        boundServiceButton.setOnClickListener(v -> onBoundServiceBtnClicked(v));
+
+        Button unBoundServiceButton = findViewById(R.id.unBoundServiceButton);
+        unBoundServiceButton.setOnClickListener(v -> onUnBoundServiceBtnClicked());
+
+        musicFunctionButton = findViewById(R.id.musicFunctionButton);
+        musicFunctionButton.setOnClickListener(v -> musicFunctionBtnClicked());
+    }
+
+    private void musicFunctionBtnClicked() {
+        if (isServiceBound) {
+            if (musicPlayerService.isPlaying()) {
+                musicPlayerService.pause();
+                musicFunctionButton.setText(R.string.app_play_music);
             } else {
-                Intent intent = new Intent(MainActivity.this, MusicPlayerService.class);
-                startService(intent);
-                mMusicPlayerService.play();
-                mPlayButton.setText(AppConstant.MUSIC_SERVICE_ACTION_PAUSE);
+                // startService(intent);
+                musicPlayerService.play();
+                musicFunctionButton.setText(R.string.app_pause_music);
             }
+        } else Toast.makeText(this, "Service is not bounded", Toast.LENGTH_LONG).show();
+    }
+
+    private void onUnBoundServiceBtnClicked() {
+        if (isServiceBound) {
+            unbindService(serviceConnection);
+            musicFunctionButton.setText(R.string.app_play_music);
+            isServiceBound = false;
         }
     }
 
-    private ServiceConnection mServiceCon = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder iBinder) {
-            MusicPlayerService.MyServiceBinder myServiceBinder = (MusicPlayerService.MyServiceBinder) iBinder;
-            mMusicPlayerService = myServiceBinder.getService();
-            mBound = true;
-            Log.d(TAG, "onServiceConnected");
+    private void onBoundServiceBtnClicked(View v) {
+        if (serviceConnection == null) {
+            serviceConnection = new ServiceConnection() {
+                @Override
+                public void onServiceConnected(ComponentName name, IBinder iBinder) {
+                    MusicPlayerService.MyServiceBinder myServiceBinder = (MusicPlayerService.MyServiceBinder) iBinder;
+                    musicPlayerService = myServiceBinder.getService();
+                    isServiceBound = true;
+                    if (musicPlayerService.isPlaying()) {
+                        musicFunctionButton.setText(R.string.app_pause_music);
+                    }
+                    Log.d(TAG, "from onBound method,on Service Connected");
+                }
 
-            if (mMusicPlayerService.isPlaying()) {
-                mPlayButton.setText("Pause");
-            }
+                @Override
+                public void onServiceDisconnected(ComponentName name) {
+                    isServiceBound = false;
+                    Log.d(TAG, "from onBound method,on Service Disconnected");
+                }
+            };
         }
+        bindService(musicServiceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
+    }
 
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            Log.d(TAG, "onServiceDisconnected");
-            mBound = false;
-        }
-    };
+    private void onStopBtnClicked(View v) {
+        stopService(musicServiceIntent);
+    }
+
+    public void onStartServiceBtnClicked(View view) {
+        startService(musicServiceIntent);
+    }
 
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String result = intent.getStringExtra(AppConstant.MUSIC_SERVICE_STATUS_KEY);
-            if (result == AppConstant.MUSIC_SERVICE_STATUS_DONE)
-                mPlayButton.setText(AppConstant.MUSIC_SERVICE_ACTION_PLAY);
+            String statusMessage = intent.getStringExtra(AppConstant.MUSIC_SERVICE_STATUS_KEY);
+            switch (statusMessage) {
+                case AppConstant.MUSIC_SERVICE_STATUS_COMPLETE: {
+                    musicFunctionButton.setText(R.string.app_play_music);
+                    break;
+                }
+            }
             Log.d(TAG, "onReceive: Thread name: " + Thread.currentThread().getName());
         }
     };
@@ -82,21 +123,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Log.d(TAG, "onStart: called");
-        Intent intent = new Intent(MainActivity.this, MusicPlayerService.class);
-        bindService(intent, mServiceCon, Context.BIND_AUTO_CREATE);
-
+        musicServiceIntent = new Intent(MainActivity.this, MusicPlayerService.class);
         LocalBroadcastManager.getInstance(getApplicationContext())
-                .registerReceiver(mReceiver, new IntentFilter(AppConstant.MUSIC_SERVICE_STATUS_COMPLETE));
+                .registerReceiver(mReceiver, new IntentFilter(AppConstant.LOCAL_BROADCAST_MANAGER_COMMUNICATION_KEY));
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if (mBound) {
-            unbindService(mServiceCon);
-            mBound = false;
-        }
-
+        onUnBoundServiceBtnClicked();
         LocalBroadcastManager.getInstance(getApplicationContext())
                 .unregisterReceiver(mReceiver);
     }

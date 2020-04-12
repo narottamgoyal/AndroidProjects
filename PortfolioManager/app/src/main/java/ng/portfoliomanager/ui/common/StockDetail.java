@@ -1,6 +1,7 @@
 package ng.portfoliomanager.ui.common;
 
 import io.realm.RealmObject;
+import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
 
 public class StockDetail extends RealmObject {
@@ -8,6 +9,17 @@ public class StockDetail extends RealmObject {
     public String Id;
     public String Name;
     public String Date;
+
+    @Ignore
+    private boolean Checked;
+
+    public boolean isChecked() {
+        return Checked;
+    }
+
+    public void setChecked(boolean checked) {
+        Checked = checked;
+    }
 
     public String getId() {
         return Id;

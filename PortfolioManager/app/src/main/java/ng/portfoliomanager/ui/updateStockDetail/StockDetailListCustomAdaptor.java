@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -48,6 +50,7 @@ public class StockDetailListCustomAdaptor extends BaseAdapter {
 
         if (stockDetail != null) {
             TextView stockName = (TextView) convertView.findViewById(R.id.stockNameId);
+            CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.checkBoxId);
             TextView sockPurchasedDate = (TextView) convertView.findViewById(R.id.stockPurchasedDateTextView);
             if (stockName != null) {
                 stockName.setText(stockDetail.getName());
@@ -55,6 +58,13 @@ public class StockDetailListCustomAdaptor extends BaseAdapter {
             if (sockPurchasedDate != null) {
                 sockPurchasedDate.setText(stockDetail.getDate());
             }
+            checkBox.setChecked(stockDetail.isChecked());
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    stockDetail.setChecked(isChecked);
+                }
+            });
         }
 
         return convertView;

@@ -24,3 +24,5 @@ Simple Portfolio Manager
 - [Custom ListView Adapter [With Loading Animation]](https://www.youtube.com/watch?v=SApBLHIpH8A)
 - [Android listview header](https://www.youtube.com/watch?v=EnG5ZIVfki8)
 - [Set the text color of textview in code](https://stackoverflow.com/a/4602929/1175623)
+- [Search Icon](https://material.io/resources/icons/?icon=accessibility&style=baseline)
+- [Generate Icon](https://romannurik.github.io/AndroidAssetStudio/index.html)

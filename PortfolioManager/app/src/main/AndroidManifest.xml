@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.updateStockDetail.StockDetailActivity"></activity>
+        <activity android:name=".ui.updateStockDetail.StockDetailActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">

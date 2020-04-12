@@ -25,6 +25,7 @@ public class RealmDbListFragment extends Fragment {
     ListView listView;
     private Realm realm;
     RealmChangeListener realmChangeListener;
+    CustomAdaptor adapter;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -39,7 +40,7 @@ public class RealmDbListFragment extends Fragment {
         ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.stock_report_list_header, listView, false);
         listView.addHeaderView(headerView);
 
-        CustomAdaptor adapter = new CustomAdaptor(this.getContext(), realmDatabaseHelper.GetReport());
+        adapter = new CustomAdaptor(this.getContext(), realmDatabaseHelper.GetReport());
         listView.setAdapter(adapter);
 
         Refresh(this.getContext());
@@ -51,7 +52,7 @@ public class RealmDbListFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onChange(Object o) {
-                CustomAdaptor adapter = new CustomAdaptor(context, realmDatabaseHelper.GetReport());
+                adapter = new CustomAdaptor(context, realmDatabaseHelper.GetReport());
                 listView.setAdapter(adapter);
             }
         };

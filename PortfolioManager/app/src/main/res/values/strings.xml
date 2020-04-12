@@ -9,4 +9,5 @@
     <string name="dateHeader">Purchased Date</string>
     <string name="stockCount">Quantity</string>
     <string name="stockAction">Action</string>
+    <string name="delete_record">Delete Record</string>
 </resources>

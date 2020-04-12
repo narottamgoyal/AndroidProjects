@@ -4,7 +4,7 @@ Simple Portfolio Manager
 
 | Add Stock                                                                                                     | Report                                                                                                        | Update                                                                                                        |
 | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| ![image](https://user-images.githubusercontent.com/2716202/79053213-46cd1380-7c59-11ea-8eb0-1e6c377415f5.png) | ![image](https://user-images.githubusercontent.com/2716202/79053155-b8589200-7c58-11ea-80ac-88257e0943e2.png) | ![image](https://user-images.githubusercontent.com/2716202/79053165-c9a19e80-7c58-11ea-9afc-f905e008a2f4.png) |
+| ![image](https://user-images.githubusercontent.com/2716202/79053213-46cd1380-7c59-11ea-8eb0-1e6c377415f5.png) | ![image](https://user-images.githubusercontent.com/2716202/79053155-b8589200-7c58-11ea-80ac-88257e0943e2.png) | ![image](https://user-images.githubusercontent.com/2716202/79062332-22a01f80-7cb7-11ea-944e-80d97d3b7b6a.png) |
 
 # Install debug app in mobile
 

@@ -1,7 +1,6 @@
 package ng.portfoliomanager.ui.updateStockDetail;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import java.util.ArrayList;
 
 import ng.portfoliomanager.R;
 import ng.portfoliomanager.ui.common.StockDetail;
-import ng.portfoliomanager.ui.common.StockReport;
 
 public class StockDetailListCustomAdaptor extends BaseAdapter {
 

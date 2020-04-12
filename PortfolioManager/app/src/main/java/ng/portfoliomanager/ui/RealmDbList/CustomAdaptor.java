@@ -57,14 +57,11 @@ public class CustomAdaptor extends BaseAdapter {
             }
 
             // Row click event for update
-            convertView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, StockDetailActivity.class);
-                    //intent.putExtra("id", stockReport.getId());
-                    intent.putExtra("stockName", stockReport.getName());
-                    context.startActivity(intent);
-                }
+            convertView.setOnClickListener(v -> {
+                Intent intent = new Intent(context, StockDetailActivity.class);
+                //intent.putExtra("id", stockReport.getId());
+                intent.putExtra("stockName", stockReport.getName());
+                context.startActivity(intent);
             });
         }
 

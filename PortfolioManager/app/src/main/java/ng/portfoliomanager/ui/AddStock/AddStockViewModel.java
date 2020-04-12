@@ -49,14 +49,11 @@ public class AddStockViewModel extends ViewModel {
     }
 
     private void saveInRealmDb(String name, String date) {
-        realm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm bgRealm) {
-                String primaryKeyValue = UUID.randomUUID().toString();
-                StockDetail stockDetail = bgRealm.createObject(StockDetail.class, primaryKeyValue);
-                stockDetail.setName(name);
-                stockDetail.setDate(date);
-            }
+        realm.executeTransactionAsync(bgRealm -> {
+            String primaryKeyValue = UUID.randomUUID().toString();
+            StockDetail stockDetail = bgRealm.createObject(StockDetail.class, primaryKeyValue);
+            stockDetail.setName(name);
+            stockDetail.setDate(date);
         }, new Realm.Transaction.OnSuccess() {
             @Override
             public void onSuccess() {

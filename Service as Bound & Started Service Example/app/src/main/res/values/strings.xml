@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ServiceExample</string>
+    <string name="app_play_music">Play Music</string>
+    <string name="app_pause_music">Pause Music</string>
+    <string name="app_start_service">Start Service</string>
+    <string name="app_stop_service">Stop Service</string>
+    <string name="app_bound_service">Bound Service</string>
+    <string name="app_unbound_service">UnBound Service</string>
+
+</resources>

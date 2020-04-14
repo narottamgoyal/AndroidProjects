@@ -59,6 +59,7 @@ public class MusicPlayerService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d(TAG, "onStartCommand: ");
         return START_NOT_STICKY;
     }
 

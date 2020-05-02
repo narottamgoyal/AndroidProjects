@@ -33,9 +33,6 @@ import android.widget.Toast;
 // Youtube : https://www.youtube.com/watch?v=s7ph4x70m7w&list=PLk7v1Z2rk4hjM2NPKqtWQ_ndCuoqUj5Hh&index=4
 public class MainActivity extends AppCompatActivity {
 
-    private static final String Channel_Id = "notification_Channel_Id";
-    private static final String Channel_Name = "notification_Channel_Name";
-    private static final String Channel_Des = "notification Channel des";
     EditText userIdEditText, passwordEditText;
     private FirebaseAuth firebaseAuth;
     ProgressBar progressBar;
@@ -46,8 +43,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(Channel_Id, Channel_Name, NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription(Channel_Des);
+            NotificationChannel channel = new NotificationChannel(NotificationHelper.Channel_Id,
+                    NotificationHelper.Channel_Name, NotificationManager.IMPORTANCE_DEFAULT);
+
+            channel.setDescription(NotificationHelper.Channel_Des);
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
@@ -89,7 +88,9 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         findViewById(R.id.showNotificationButton).setOnClickListener(v -> {
-            displayNotification();
+            NotificationHelper.displayNotification(this,
+                    "My first notification working",
+                    "My first notification message");
         });
     }
 
@@ -149,19 +150,6 @@ public class MainActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
-
-    private void displayNotification() {
-        NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(this, Channel_Id)
-                        .setSmallIcon(R.drawable.ic_note)
-                        .setContentTitle("My first notification working")
-                        .setContentText("My first notification message")
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
-        notificationManagerCompat.notify(1, builder.build());
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

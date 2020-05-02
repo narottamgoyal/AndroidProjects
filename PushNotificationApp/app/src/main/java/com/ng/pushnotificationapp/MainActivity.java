@@ -2,6 +2,7 @@ package com.ng.pushnotificationapp;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -9,6 +10,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
@@ -21,13 +25,20 @@ import androidx.core.app.NotificationManagerCompat;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+// Youtube : https://www.youtube.com/watch?v=s7ph4x70m7w&list=PLk7v1Z2rk4hjM2NPKqtWQ_ndCuoqUj5Hh&index=4
 public class MainActivity extends AppCompatActivity {
 
     private static final String Channel_Id = "notification_Channel_Id";
     private static final String Channel_Name = "notification_Channel_Name";
     private static final String Channel_Des = "notification Channel des";
+    EditText userIdEditText, passwordEditText;
+    private FirebaseAuth firebaseAuth;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
         TextView textView = findViewById(R.id.textViewToken);
 
@@ -55,12 +68,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.INVISIBLE);
+        userIdEditText = findViewById(R.id.usernameid);
+        passwordEditText = findViewById(R.id.passwordid);
+
+        findViewById(R.id.loginButtonId).setOnClickListener(v -> {
+            createUser();
+        });
+
+
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(task -> {
-                    if(task.isSuccessful()) {
+                    if (task.isSuccessful()) {
                         String token = task.getResult().getToken();
                         textView.setText("Token: " + token);
-                    } else  {
+                    } else {
                         textView.setText("Token error: " + task.getException().getMessage());
                     }
                 });
@@ -68,6 +91,55 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.showNotificationButton).setOnClickListener(v -> {
             displayNotification();
         });
+    }
+
+    private void createUser() {
+        String userId = userIdEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
+
+        if (userId.isEmpty()) {
+            userIdEditText.setError("userId is empty");
+            return;
+        }
+
+        if (password.isEmpty() || password.length() < 6) {
+            passwordEditText.setError("Password is empty or length is less than 6 char");
+            return;
+        }
+
+        progressBar.setVisibility(View.VISIBLE);
+        firebaseAuth.createUserWithEmailAndPassword(userId, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        startProfileActivity();
+                    } else {
+                        if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                            LoginUser(userId, password);
+                        } else {
+                            progressBar.setVisibility(View.INVISIBLE);
+                            Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+    }
+
+    private void LoginUser(String userId, String password) {
+        firebaseAuth.signInWithEmailAndPassword(userId, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        startProfileActivity();
+                    } else {
+                        progressBar.setVisibility(View.INVISIBLE);
+                        Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    private void startProfileActivity() {
+        Intent intent = new Intent(this, ProfileActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     private void displayNotification() {

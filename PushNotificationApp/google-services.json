@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "375136755188",
+    "firebase_url": "https://portfolio-manager-256c6.firebaseio.com",
+    "project_id": "portfolio-manager-256c6",
+    "storage_bucket": "portfolio-manager-256c6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:375136755188:android:5b29474c1cb163e8fa2da1",
+        "android_client_info": {
+          "package_name": "com.ng.pushnotificationapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "375136755188-2of50hjvahdssfg8k3d7l081ld5sc4q3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ng.pushnotificationapp",
+            "certificate_hash": "018dc2a96f78dc8fa4a5adb1b8a87206e19034e7"
+          }
+        },
+        {
+          "client_id": "375136755188-6ql13quhdljghvo7on2u454p8mls6nl9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4bMgYk2UogrTYSyG4FCWbik-tV5Smypw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "375136755188-6ql13quhdljghvo7on2u454p8mls6nl9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -14,4 +14,5 @@
     <string name="enter_password">Enter password</string>
     <string name="LoginButton">Login</string>
     <string name="enter_userid">Enter userid</string>
+    <string name="logoutButton">Logout</string>
 </resources>

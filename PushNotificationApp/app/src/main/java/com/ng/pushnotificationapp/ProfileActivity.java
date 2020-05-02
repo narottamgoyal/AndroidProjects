@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +26,8 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         firebaseAuth = FirebaseAuth.getInstance();
 
+        //NotificationHelper.displayNotification(ProfileActivity.this, "this is title", "here is your message");
+
         FirebaseMessaging.getInstance().subscribeToTopic("MessagingTopicName");
 
         FirebaseInstanceId.getInstance().getInstanceId()
@@ -36,11 +39,19 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 });
 
+        findViewById(R.id.logoutButton).setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            IsUserLoggedIn();
+        });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        IsUserLoggedIn();
+    }
+
+    private void IsUserLoggedIn() {
         if (firebaseAuth.getCurrentUser() == null) {
             Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

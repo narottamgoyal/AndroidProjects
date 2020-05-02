@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         findViewById(R.id.showNotificationButton).setOnClickListener(v -> {
-            NotificationHelper.displayNotification(this,
+            NotificationHelper.displayAppNotification(this,
                     "My first notification working",
                     "My first notification message");
         });
@@ -122,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
-
     }
 
     private void LoginUser(String userId, String password) {
@@ -146,6 +145,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startProfileActivity() {
+        NotificationHelper.displayAppNotification(this,
+                "Hi " + userIdEditText.getText().toString().trim(),
+                "Welcome to Push Notification APP");
         Intent intent = new Intent(this, ProfileActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

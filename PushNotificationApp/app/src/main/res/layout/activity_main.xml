@@ -7,6 +7,19 @@
     tools:context=".MainActivity">
 
 
+    <TextView
+        android:id="@+id/textViewToken"
+        android:layout_width="282dp"
+        android:layout_height="95dp"
+        android:nestedScrollingEnabled="true"
+        android:singleLine="false"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/showNotificationButton"
+        app:layout_constraintStart_toStartOf="@+id/showNotificationButton"
+        app:layout_constraintTop_toBottomOf="@+id/showNotificationButton"
+        app:layout_constraintVertical_bias="0.119" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"

@@ -17,4 +17,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewId"
+            android:layout_width="376dp"
+            android:layout_height="190dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.151" />
+
+    <ProgressBar
+        android:id="@+id/userListProgressId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerViewId"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerViewId"
+        app:layout_constraintStart_toStartOf="@+id/recyclerViewId"
+        app:layout_constraintTop_toTopOf="@+id/recyclerViewId" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

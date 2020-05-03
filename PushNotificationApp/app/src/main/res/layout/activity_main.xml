@@ -75,7 +75,8 @@
             android:ems="10"
             android:gravity="start|top"
             android:hint="@string/enter_userid"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:text="@string/default_User" />
 
         <EditText
             android:id="@+id/passwordid"
@@ -85,7 +86,8 @@
             android:ems="10"
             android:gravity="start|top"
             android:hint="@string/enter_password"
-            android:inputType="textMultiLine|textWebPassword" />
+            android:inputType="textMultiLine|textWebPassword"
+            android:text="@string/default_password" />
 
         <Button
             android:id="@+id/loginButtonId"

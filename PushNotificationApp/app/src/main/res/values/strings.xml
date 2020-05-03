@@ -15,4 +15,6 @@
     <string name="LoginButton">Login</string>
     <string name="enter_userid">Enter userid</string>
     <string name="logoutButton">Logout</string>
+    <string name="default_User">ng@123.com</string>
+    <string name="default_password">123456</string>
 </resources>

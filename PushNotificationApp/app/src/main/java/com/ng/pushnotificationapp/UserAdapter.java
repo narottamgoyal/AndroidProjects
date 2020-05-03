@@ -1,6 +1,7 @@
 package com.ng.pushnotificationapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewEmail = itemView.findViewById(R.id.textViewEmailId);
+
+            itemView.setOnClickListener(v -> {
+                User user = userList.get(getAdapterPosition());
+                Intent intent = new Intent(context, SendNotificationActivity.class);
+                intent.putExtra("user", user);
+                context.startActivity(intent);
+            });
         }
     }
 }

@@ -17,4 +17,8 @@
     <string name="logoutButton">Logout</string>
     <string name="default_User">ng@123.com</string>
     <string name="default_password">123456</string>
+    <string name="textview_to">To</string>
+    <string name="send_button">Send</string>
+    <string name="enter_notification_body">enter notification body</string>
+    <string name="enter_notification_title">enter notification title</string>
 </resources>

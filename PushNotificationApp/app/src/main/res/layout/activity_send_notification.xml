@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SendNotificationActivity">
+
+    <TextView
+        android:id="@+id/toEmailId"
+        android:layout_width="325dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/textview_to"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/notificationTitleId"
+        android:layout_width="323dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/enter_notification_title"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="@+id/toEmailId"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/toEmailId"
+        app:layout_constraintTop_toBottomOf="@+id/toEmailId"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/notificationBodyId"
+        android:layout_width="320dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/enter_notification_body"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="@+id/notificationTitleId"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/notificationTitleId"
+        app:layout_constraintTop_toBottomOf="@+id/notificationTitleId"
+        android:autofillHints="" />
+
+    <Button
+        android:id="@+id/sendNotificationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="240dp"
+        android:text="@string/send_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/notificationBodyId"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/notificationBodyId"
+        app:layout_constraintTop_toBottomOf="@+id/notificationBodyId"
+        app:layout_constraintVertical_bias="0.385" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,6 +16,7 @@ git push heroku master
 
 ```
 
+![image](https://user-images.githubusercontent.com/2716202/80916424-326ec900-8d76-11ea-9901-1c0616403624.png)
 
 A barebones Node.js app using [Express 4](http://expressjs.com/).
 

@@ -1,5 +1,19 @@
 # Push Notification App
 
+```
+
+User 1 (Mobile app) ---
+Send                    \
+Message                  --- nodejs api ---                      --- Selected User (Mobile app)
+                             deployed on    \                   /    Will Receive
+                             heroku server   \                 /     Message
+                                              --- Firebase ---
+                                                  Cloud
+                                                  Messaging
+                                              
+                                                                    
+```
+
 - [Push Notification series](https://www.youtube.com/watch?v=s7ph4x70m7w&list=PLk7v1Z2rk4hjM2NPKqtWQ_ndCuoqUj5Hh&index=4)
 - [Create web app  ui to send notification](https://www.youtube.com/watch?v=LT2n5sF_5vw&list=PLk7v1Z2rk4hjM2NPKqtWQ_ndCuoqUj5Hh&index=9)
 - [Git linl](https://github.com/probelalkhan)
